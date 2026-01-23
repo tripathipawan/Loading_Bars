@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Circle Loading Animations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a12;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            align-items: center;
+            justify-items: center;
+        }
+        
+        .circle-loader {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 1. Simple Spinner */
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(0, 100, 255, 0.1);
+            border-top: 8px solid #0066ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 2. Dot Circle */
+        .dot-circle {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .dot-circle::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #00ff88;
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: dot-rotate 1.5s linear infinite;
+            box-shadow: 0 0 10px #00ff88;
+        }
+        
+        @keyframes dot-rotate {
+            0% { 
+                transform: translateX(-50%) rotate(0deg) translateY(40px) rotate(0deg); 
+            }
+            100% { 
+                transform: translateX(-50%) rotate(360deg) translateY(40px) rotate(-360deg); 
+            }
+        }
+        
+        /* 3. Pulse Rings */
+        .pulse-rings {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .pulse-rings::before,
+        .pulse-rings::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #ff3366;
+            border-radius: 50%;
+            animation: pulse-ring 2s linear infinite;
+        }
+        
+        .pulse-rings::after {
+            animation-delay: 1s;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* 4. Neon Circle */
+        .neon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            background: 
+                linear-gradient(#0a0a12, #0a0a12) padding-box,
+                linear-gradient(45deg, #ff00cc, #00ffff) border-box;
+            animation: neon-spin 2s linear infinite;
+        }
+        
+        @keyframes neon-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 5. Clock Loader */
+        .clock-loader {
+            width: 80px;
+            height: 80px;
+            border: 4px solid #333344;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .clock-loader::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 30px;
+            background: #00ff88;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+            animation: clock-tick 2s linear infinite;
+        }
+        
+        @keyframes clock-tick {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 6. Orbit Dots */
+        .orbit-dots {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .orbit-dots div {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ffaa00;
+            border-radius: 50%;
+            animation: orbit 1.5s linear infinite;
+        }
+        
+        .orbit-dots div:nth-child(1) { animation-delay: 0s; }
+        .orbit-dots div:nth-child(2) { animation-delay: 0.3s; }
+        .orbit-dots div:nth-child(3) { animation-delay: 0.6s; }
+        .orbit-dots div:nth-child(4) { animation-delay: 0.9s; }
+        
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg) translateX(40px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(360deg) translateX(40px) rotate(-360deg);
+                opacity: 0.3;
+            }
+        }
+        
+        /* 7. Gear Loader */
+        .gear-loader {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .gear-loader::before,
+        .gear-loader::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 8px solid transparent;
+            border-radius: 50%;
+            border-top-color: #ff3366;
+            border-bottom-color: #ff3366;
+            animation: gear-spin 1.5s ease-in-out infinite;
+        }
+        
+        .gear-loader::after {
+            width: 60px;
+            height: 60px;
+            top: 10px;
+            left: 10px;
+            border-top-color: #00ff88;
+            border-bottom-color: #00ff88;
+            animation-direction: reverse;
+        }
+        
+        @keyframes gear-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 8. Circle Dash */
+        .circle-dash {
+            width: 80px;
+            height: 80px;
+            border: 6px solid #333344;
+            border-radius: 50%;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            animation: dash-spin 1s linear infinite;
+        }
+        
+        @keyframes dash-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 9. Bubble Circle */
+        .bubble-circle {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .bubble-circle div {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #00aaff;
+            border-radius: 50%;
+            animation: bubble 2s ease-in-out infinite;
+        }
+        
+        .bubble-circle div:nth-child(1) {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 0s;
+        }
+        
+        .bubble-circle div:nth-child(2) {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            animation-delay: 0.5s;
+        }
+        
+        .bubble-circle div:nth-child(3) {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 1s;
+        }
+        
+        .bubble-circle div:nth-child(4) {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes bubble {
+            0%, 100% {
+                transform: scale(0.5);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+        
+        /* 10. Infinity Circle */
+        .infinity-circle {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .infinity-circle::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                transparent,
+                #ff00cc,
+                #00ffff,
+                #ffaa00,
+                transparent
+            );
+            animation: infinity-spin 2s linear infinite;
+            mask: radial-gradient(circle at center, transparent 55%, black 56%);
+        }
+        
+        @keyframes infinity-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. Simple Spinner -->
+    <div class="circle-loader">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- 2. Dot Circle -->
+    <div class="circle-loader">
+        <div class="dot-circle"></div>
+    </div>
+    
+    <!-- 3. Pulse Rings -->
+    <div class="circle-loader">
+        <div class="pulse-rings"></div>
+    </div>
+    
+    <!-- 4. Neon Circle -->
+    <div class="circle-loader">
+        <div class="neon-circle"></div>
+    </div>
+    
+    <!-- 5. Clock Loader -->
+    <div class="circle-loader">
+        <div class="clock-loader"></div>
+    </div>
+    
+    <!-- 6. Orbit Dots -->
+    <div class="circle-loader">
+        <div class="orbit-dots">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    
+    <!-- 7. Gear Loader -->
+    <div class="circle-loader">
+        <div class="gear-loader"></div>
+    </div>
+    
+    <!-- 8. Circle Dash -->
+    <div class="circle-loader">
+        <div class="circle-dash"></div>
+    </div>
+    
+    <!-- 9. Bubble Circle -->
+    <div class="circle-loader">
+        <div class="bubble-circle">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    
+    <!-- 10. Infinity Circle -->
+    <div class="circle-loader">
+        <div class="infinity-circle"></div>
+    </div>
+</body>
+</html>

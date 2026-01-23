@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Cool Loading Animations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0f0f1a;
+            color: #fff;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .loading-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .loading-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .number {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .loading-item {
+            position: relative;
+        }
+        
+        /* 1. Neon Wave Loader */
+        .neon-wave {
+            width: 180px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .neon-wave::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #00f3ff, transparent);
+            animation: neon-wave 2s infinite linear;
+        }
+        
+        @keyframes neon-wave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* 2. Pixel Progress */
+        .pixel-progress {
+            width: 200px;
+            height: 20px;
+            display: flex;
+            gap: 4px;
+        }
+        
+        .pixel-progress div {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            animation: pixel-load 1.6s infinite ease-in-out;
+        }
+        
+        .pixel-progress div:nth-child(1) { animation-delay: 0s; }
+        .pixel-progress div:nth-child(2) { animation-delay: 0.2s; }
+        .pixel-progress div:nth-child(3) { animation-delay: 0.4s; }
+        .pixel-progress div:nth-child(4) { animation-delay: 0.6s; }
+        .pixel-progress div:nth-child(5) { animation-delay: 0.8s; }
+        .pixel-progress div:nth-child(6) { animation-delay: 1.0s; }
+        .pixel-progress div:nth-child(7) { animation-delay: 1.2s; }
+        .pixel-progress div:nth-child(8) { animation-delay: 1.4s; }
+        
+        @keyframes pixel-load {
+            0%, 100% { background: rgba(255, 255, 255, 0.1); }
+            50% { background: #ff2d75; }
+        }
+        
+        /* 3. Orbital Loader */
+        .orbital-loader {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+        
+        .orbital-loader::before,
+        .orbital-loader::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            border-top-color: #00ff88;
+            animation: spin 1.5s linear infinite;
+        }
+        
+        .orbital-loader::after {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border-top-color: #ff2d75;
+            animation-direction: reverse;
+            animation-duration: 1s;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 4. Liquid Fill */
+        .liquid-fill {
+            width: 180px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .liquid-fill::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #0088ff, #00ffcc);
+            animation: liquid-fill-anim 2s infinite ease-in-out;
+            border-radius: 2px;
+        }
+        
+        @keyframes liquid-fill-anim {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(0); }
+        }
+        
+        /* 5. Dot Matrix */
+        .dot-matrix {
+            width: 120px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .dot-matrix span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00ff88;
+            animation: matrix-pulse 1.5s infinite ease-in-out;
+        }
+        
+        .dot-matrix span:nth-child(2) { animation-delay: 0.2s; }
+        .dot-matrix span:nth-child(3) { animation-delay: 0.4s; }
+        .dot-matrix span:nth-child(4) { animation-delay: 0.6s; }
+        .dot-matrix span:nth-child(5) { animation-delay: 0.8s; }
+        
+        @keyframes matrix-pulse {
+            0%, 100% { 
+                transform: scale(0.5);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+        
+        /* 6. Glitch Bar */
+        .glitch-bar {
+            width: 200px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glitch-bar::before {
+            content: '';
+            position: absolute;
+            width: 40%;
+            height: 100%;
+            background: #ff2d75;
+            animation: glitch-move 2s infinite steps(8);
+        }
+        
+        .glitch-bar::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #00ff88;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: glitch-line 0.8s infinite linear;
+        }
+        
+        @keyframes glitch-move {
+            0%, 100% { left: 0; }
+            50% { left: 60%; }
+        }
+        
+        @keyframes glitch-line {
+            0% { transform: translateY(-50%) translateX(-100%); }
+            100% { transform: translateY(-50%) translateX(100%); }
+        }
+        
+        /* 7. Neon Rings */
+        .neon-rings {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+        
+        .neon-rings span {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid;
+            border-radius: 50%;
+            border-color: transparent #00ff88 transparent transparent;
+            animation: rings-rotate 2s linear infinite;
+        }
+        
+        .neon-rings span:nth-child(2) {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border-color: transparent transparent #ff2d75 transparent;
+            animation-duration: 1.5s;
+            animation-direction: reverse;
+        }
+        
+        .neon-rings span:nth-child(3) {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            border-color: #0088ff transparent transparent transparent;
+            animation-duration: 1s;
+        }
+        
+        @keyframes rings-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 8. Barcode Loader */
+        .barcode-loader {
+            width: 200px;
+            height: 30px;
+            display: flex;
+            gap: 3px;
+        }
+        
+        .barcode-loader div {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            animation: barcode-scan 1.8s infinite ease-in-out;
+        }
+        
+        .barcode-loader div:nth-child(odd) {
+            animation-delay: 0.3s;
+        }
+        
+        @keyframes barcode-scan {
+            0%, 100% { 
+                transform: scaleY(0.3);
+                background: rgba(255, 255, 255, 0.1);
+            }
+            50% { 
+                transform: scaleY(1.2);
+                background: #0088ff;
+            }
+        }
+        
+        /* 9. Circuit Loader */
+        .circuit-loader {
+            width: 120px;
+            height: 60px;
+            position: relative;
+        }
+        
+        .circuit-loader::before,
+        .circuit-loader::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ff88;
+            animation: circuit-pulse 1.2s infinite;
+        }
+        
+        .circuit-loader::before {
+            top: 0;
+            left: 0;
+        }
+        
+        .circuit-loader::after {
+            bottom: 0;
+            right: 0;
+            animation-delay: 0.6s;
+        }
+        
+        .circuit-loader span {
+            position: absolute;
+            width: 80px;
+            height: 2px;
+            background: #00ff88;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            animation: circuit-line 1.2s infinite;
+        }
+        
+        @keyframes circuit-pulse {
+            0%, 100% { 
+                transform: scale(0.5);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes circuit-line {
+            0%, 100% { 
+                width: 0;
+                left: 20px;
+            }
+            50% { 
+                width: 80px;
+            }
+        }
+        
+        /* 10. Gradient Flow */
+        .gradient-flow {
+            width: 200px;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, 
+                #ff2d75, 
+                #ff2d75 25%, 
+                #00ff88 25%, 
+                #00ff88 50%,
+                #0088ff 50%,
+                #0088ff 75%,
+                #00f3ff 75%
+            );
+            background-size: 400% 100%;
+            animation: gradient-flow 2s infinite linear;
+        }
+        
+        @keyframes gradient-flow {
+            0% { background-position: 100% 0; }
+            100% { background-position: -300% 0; }
+        }
+        
+        /* Title styles */
+        h1 {
+            text-align: center;
+            padding: 30px;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <h1>10 COOL LOADING ANIMATIONS</h1>
+    
+    <div class="container">
+        <!-- 1. Neon Wave -->
+        <div class="loading-item">
+            <span class="number">1</span>
+            <div class="neon-wave"></div>
+        </div>
+        
+        <!-- 2. Pixel Progress -->
+        <div class="loading-item">
+            <span class="number">2</span>
+            <div class="pixel-progress">
+                <div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div>
+            </div>
+        </div>
+        
+        <!-- 3. Orbital Loader -->
+        <div class="loading-item">
+            <span class="number">3</span>
+            <div class="orbital-loader"></div>
+        </div>
+        
+        <!-- 4. Liquid Fill -->
+        <div class="loading-item">
+            <span class="number">4</span>
+            <div class="liquid-fill"></div>
+        </div>
+        
+        <!-- 5. Dot Matrix -->
+        <div class="loading-item">
+            <span class="number">5</span>
+            <div class="dot-matrix">
+                <span></span><span></span><span></span>
+                <span></span><span></span>
+            </div>
+        </div>
+        
+        <!-- 6. Glitch Bar -->
+        <div class="loading-item">
+            <span class="number">6</span>
+            <div class="glitch-bar"></div>
+        </div>
+        
+        <!-- 7. Neon Rings -->
+        <div class="loading-item">
+            <span class="number">7</span>
+            <div class="neon-rings">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- 8. Barcode Loader -->
+        <div class="loading-item">
+            <span class="number">8</span>
+            <div class="barcode-loader">
+                <div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div>
+            </div>
+        </div>
+        
+        <!-- 9. Circuit Loader -->
+        <div class="loading-item">
+            <span class="number">9</span>
+            <div class="circuit-loader">
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- 10. Gradient Flow -->
+        <div class="loading-item">
+            <span class="number">10</span>
+            <div class="gradient-flow"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simple hover effect enhancement
+        document.querySelectorAll('.loading-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
